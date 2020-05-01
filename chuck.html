@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuck Norris Jokes</title>
+</head>
+<body>
+    <h1>Chuck Norris Jokes</h1>
+    <button onclick="nextJoke()">Get Next</button>
+    <hr>
+    <div id="joke"></div>
+
+    <script type="text/javascript">
+        function nextJoke() {
+            var request = new XMLHttpRequest();
+            request.open("GET", "https://api.chucknorris.io/jokes/random");
+
+            request.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    let data = JSON.parse(this.responseText);
+                    document.getElementById("joke").innerHTML = data.value;
+                }
+            };
+
+            request.send();
+        }
+    </script>
+
+</body>
+</html>
